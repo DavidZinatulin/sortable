@@ -2,6 +2,7 @@
 .idea
 .DS_STORE
 node_modules
+package-lock.json
 .module-cache
 *.log*
 build

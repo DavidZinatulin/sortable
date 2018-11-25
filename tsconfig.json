@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
+
     "sourceMap": true,
     "target": "es5",
     "jsx": "react",
     "module": "es6",
     "moduleResolution": "node",
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "declaration": false,
     "removeComments": true,

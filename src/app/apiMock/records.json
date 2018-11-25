@@ -1,0 +1,22 @@
+[
+  {"id": 1, "artist": "Kazka", "title": "Плакала", "new": false, "streams": 30.028, "progress": 5},
+  {"id": 2, "artist": "Макс Барских", "title": "БЕРЕГА", "new": false, "streams": 20.443, "progress": 2},
+  {"id": 3, "artist": "Тима Белорусских", "title": "Мокрые кроссы", "new": true, "streams": 17.711, "progress": 0},
+  {"id": 4, "artist": "Imagine Dragons", "title": "Natural", "new": true, "streams": 15.3, "progress": 0},
+  {"id": 5, "artist": "Dynoro, Gigi D'Agostino", "title": "In My Mind", "new": false, "streams": 14.662, "progress": -3},
+  {"id": 6, "artist": "Лёша Свик", "title": "Малиновый свет", "new": true, "streams": 14.304, "progress": 0},
+  {"id": 7, "artist": "Queen", "title": "Bohemian Rhapsody", "new": false, "streams": 13.946, "progress": 1},
+  {"id": 8, "artist": "Rauf & Faik", "title": "Детство", "new": false, "streams": 12.441, "progress": -1},
+  {"id": 9, "artist": "Тима Белорусских", "title": "Незабудка", "new": true, "streams": 12.104, "progress": 1},
+  {"id": 10, "artist": "Queen", "title": "Another One Bites The Dust", "new": false, "streams": 12.066, "progress": -1},
+  {"id": 1, "artist": "Вера Брежнева", "title": "Любите друг друга", "new": false, "streams": 11.77, "progress": 0},
+  {"id": 1, "artist": "Imagine Dragons", "title": "Zero", "new": false, "streams": 11.242, "progress": 0},
+  {"id": 1, "artist": "LOBODA", "title": "SuperSTAR", "new": true, "streams": 10.797, "progress": 1},
+  {"id": 1, "artist": "Rompasso", "title": "Ignis", "new": false, "streams": 10.71, "progress": -2},
+  {"id": 1, "artist": "EIGHTEEN", "title": "Вода", "new": false, "streams": 10.589, "progress": 0},
+  {"id": 1, "artist": "#2Маши", "title": "Мама, я танцую", "new": true, "streams": 10.254, "progress": 0},
+  {"id": 1, "artist": "LOBODA", "title": "INSTADRAMA", "new": false, "streams": 10.214, "progress": 1},
+  {"id": 1, "artist": "Егор Крид feat. Филипп Киркоров", "title": "Цвет настроения чёрный", "new": false, "streams": 9.502, "progress": 0},
+  {"id": 1, "artist": "Queen", "title": "We Will Rock You", "new": false, "streams": 9.323, "progress": 0},
+  {"id": 20, "artist": "Rita Ora", "title": "Your Song", "new": true, "streams": 8.992, "progress": 0}
+]

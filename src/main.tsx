@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 import { configureStore } from 'app/redux/store';
 import { Route, Router, Switch } from 'react-router';
 import './app/sass/style.scss';
-import { Table } from 'app/components/Table/Table';
+import App from 'app/components/App';
 
 // prepare store
 const history = createBrowserHistory();
@@ -15,7 +15,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Switch>
-        <Route path="/" component={Table} />
+        <Route path="/" component={App} />
       </Switch>
     </Router>
   </Provider>,
