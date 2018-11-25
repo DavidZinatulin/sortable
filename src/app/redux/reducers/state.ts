@@ -1,5 +1,5 @@
-import { TableModel } from "app/models";
+import { RecordsModel } from "app/models";
 
 export interface RootState {
-  table: TableModel;
+  table: RecordsModel;
 }

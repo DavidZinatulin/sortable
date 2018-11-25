@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import recordsReducer from './recordsReducer';
+import recordsReducer from "./recordsReducer";
 
 export const rootReducer = combineReducers({
   recordsReducer

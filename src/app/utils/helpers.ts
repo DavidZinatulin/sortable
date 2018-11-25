@@ -25,3 +25,16 @@ export const compareValues = (key: string, asc: boolean) => {
     );
   };
 }
+
+export const formatData = (value: any, type: string) => {
+  switch (type) {
+    case 'round':
+      return value;
+      break;
+    case 'signum':
+      return value;
+      break;
+    default:
+      return value;
+  }
+}

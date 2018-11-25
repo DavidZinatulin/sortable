@@ -1,0 +1,8 @@
+.table {
+  &__cell {
+    display: inline-block;
+    margin-right: 20px;
+    width: 15%;
+    overflow-x: hidden;
+  }
+}

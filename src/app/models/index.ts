@@ -1,8 +1,8 @@
-export interface TableModel {
+// export type Id = number | string;
+
+export interface RecordsModel {
   data: RecordModel[];
   loading: boolean;
-  sorting: boolean;
-  sortColumn: number;
 }
 
 export interface RecordModel {
@@ -12,4 +12,11 @@ export interface RecordModel {
   new: boolean;
   streams: number;
   progress: number;
+}
+
+export interface TableHeadModel {
+  id: number,
+  label: string,
+  sortable?: boolean,
+  formatters?: string[]
 }

@@ -1,10 +1,8 @@
-import { TableModel } from "app/models";
+import { RecordsModel } from "app/models";
 
-const initialState: TableModel = {
+const initialState: RecordsModel = {
   data: [],
-  loading: false,
-  sorting: false,
-  sortColumn: 0
+  loading: false
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +16,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: action.loading,
+        data: action.data
+      };
+    case 'CLEAR_RECORDS':
+      return {
+        ...state,
         data: action.data
       };
     default:

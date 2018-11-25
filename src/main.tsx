@@ -1,11 +1,11 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createBrowserHistory } from 'history';
-import { configureStore } from 'app/redux/store';
-import { Route, Router, Switch } from 'react-router';
-import './app/sass/style.scss';
-import App from 'app/components/App';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { createBrowserHistory } from "history";
+import { configureStore } from "app/redux/store";
+import { Route, Router, Switch } from "react-router";
+import "./app/sass/style.scss";
+import App from "app/components/App";
 
 // prepare store
 const history = createBrowserHistory();
