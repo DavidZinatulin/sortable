@@ -1,14 +1,22 @@
 import * as React from "react";
 import "app/sass/components/Table.scss";
 import {default as labels} from "app/dictionaries/global.json";
+import { RecordModel } from "app/models";
+import { detectSignum } from "app/utils/helpers";
 
 interface Props {
   head: any[],
   body: any[],
   loading: boolean,
-  onLoad: (sortBy: string, asc: boolean) => void
-  onSort: (sortBy: string, asc: boolean) => void
-};
+  onLoad: (
+    itemsToLoad?: number,
+    previouslyLoaded?: RecordModel[],
+    sortBy?: string,
+    asc?: boolean
+  ) => void,
+  clearBody: () => void,
+  onSort?: (sortBy: string) => void
+}
 
 interface State {
   sortBy: string,
@@ -28,20 +36,50 @@ export default class Table extends React.Component<Props, State> {
     this.handleLoad = this.handleLoad.bind(this);
   }
 
-  private handleLoad() {
+  private handleLoad(): void {
     const {sortBy, asc} = this.state;
-    this.props.onLoad(sortBy, asc);
+
+    const { body } = this.props;
+
+    this.props.onLoad(body.length + 5, body, sortBy, asc);
   }
 
-  private handleSort(sortBy: string, sortable: boolean) {
-    if (!sortable) { return }
+  private handleSort(sortColumn: string, sortable: boolean): void {
+    const {sortBy, asc} = this.state;
 
-    let sortOrder = this.state.asc;
+    const { body, loading } = this.props;
 
-    if (sortBy === this.state.sortBy) { sortOrder = !sortOrder; }
+    if (!sortable || loading) { return }
 
-    this.setState({ sortBy, asc: sortOrder});
-    this.props.onSort(sortBy, sortOrder);
+    let sortOrder = asc;
+
+    if (sortColumn === sortBy) { sortOrder = !sortOrder; }
+
+    this.setState({ sortBy: sortColumn, asc: sortOrder});
+    this.props.clearBody();
+    this.props.onLoad(body.length , [], sortColumn, sortOrder);
+  }
+
+  private static formatCell(value: any, formatType: string): JSX.Element {
+    switch (formatType) {
+      case 'round':
+        return <span>{Math.round(value)}</span>;
+
+      case 'signum':
+        const className = detectSignum(value);
+        return <span className={`color-${className}`}>{value}</span>;
+
+      case 'replace-boolean':
+        return <span>{value? labels.bool_true: labels.bool_false}</span>;
+
+      case 'link':
+        return <span>
+          <a target="_blank" href={value}>{labels.open}</a>
+        </span>;
+
+      default:
+        return <span>{value}</span>;
+    }
   }
 
   public render() {
@@ -52,7 +90,7 @@ export default class Table extends React.Component<Props, State> {
         {head.map((item, key) => (
           <div
             key={key}
-            className="table__cell table_cell-head"
+            className="table__cell table__cell-head"
             onClick={() => this.handleSort(item.id, item.sortable)}
           >
             {item.label}
@@ -62,7 +100,9 @@ export default class Table extends React.Component<Props, State> {
         {body.map((row, rowKey) => (
           <div key={rowKey}>
             {head.map((cell, cellKey) => (
-              <div key={cellKey} className="table__cell">{row[cell.id]}</div>
+              <div key={cellKey} className="table__cell">
+                {Table.formatCell(row[cell.id], cell.format)}
+              </div>
             ))}
           </div>
         ))}

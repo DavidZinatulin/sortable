@@ -12,6 +12,7 @@ export interface RecordModel {
   new: boolean;
   streams: number;
   progress: number;
+  link: string;
 }
 
 export interface TableHeadModel {

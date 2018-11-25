@@ -4,5 +4,21 @@
     margin-right: 20px;
     width: 15%;
     overflow-x: hidden;
+
+    &-head {
+      min-height: 50px;
+    }
+  }
+
+  .color-negative {
+    color: red;
+  }
+
+  .color-positive {
+    color: lawngreen;
+  }
+
+  .color-zero {
+    color: deepskyblue;
   }
 }

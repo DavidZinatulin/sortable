@@ -1,5 +1,6 @@
 {
   "bool_true": "да",
   "bool_false": "нет",
-  "load_more": "ещё"
+  "load_more": "ещё",
+  "open": "открыть"
 }

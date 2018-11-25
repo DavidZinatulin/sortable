@@ -1,10 +1,11 @@
 import * as React from "react";
-import { clearRecords, requestRecords } from "app/redux/actions/recordsActions";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
-import Table from "app/components/Table";
 import { RecordsTable } from "app/structures/tables";
 import { RecordModel, RecordsModel } from "app/models";
+import { clearRecords, requestRecords } from "app/redux/actions/recordsActions";
+import Table from "app/components/Table";
+
 
 interface AppProps extends RecordsModel, RouteComponentProps {
   loadRecords: (
@@ -19,37 +20,29 @@ interface AppProps extends RecordsModel, RouteComponentProps {
 class App extends React.Component<AppProps> {
   constructor(props: AppProps) {
     super(props);
-
-    this.loadMore = this.loadMore.bind(this);
-    this.sort = this.sort.bind(this);
+    this.changeHashOnSort = this.changeHashOnSort.bind(this);
   }
 
   public componentDidMount() {
-    this.props.loadRecords();
+    this.props.loadRecords(5, []);
   }
 
-  private loadMore(sortBy: string, asc: boolean): void {
-    this.props.loadRecords(this.props.data.length + 5, this.props.data, sortBy, asc);
-  }
+  private changeHashOnSort(sortBy: string, asc: boolean): void {
 
-  private sort(sortBy: string, asc: boolean): void {
-    const itemsToLoad = this.props.data.length;
-
-    this.props.clearRecords();
-    this.props.loadRecords(itemsToLoad, [], sortBy, asc);
   }
 
   public render() {
     return(
-      <div className='App'>
+      <div className='app'>
         <p>this is the app</p>
         <p>{this.props.location.hash.replace('#', '')}</p>
         <Table
           head={RecordsTable}
           body={this.props.data}
           loading={this.props.loading}
-          onLoad={this.loadMore}
-          onSort={this.sort}
+          onLoad={this.props.loadRecords}
+          // onSort={this.changeHashOnSort}
+          clearBody={this.props.clearRecords}
         />
       </div>
 
