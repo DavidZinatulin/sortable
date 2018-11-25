@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { loadRecords } from "app/redux/actions/recordsActions";
+import { requestRecords } from "app/redux/actions/recordsActions";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 
@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadRecords: (sortColumn, returnCount) =>
-    dispatch(loadRecords(sortColumn, returnCount)),
+    dispatch(requestRecords(sortColumn, returnCount)),
 });
 
 export default connect(

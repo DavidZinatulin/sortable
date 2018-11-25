@@ -1,4 +1,4 @@
-export const compareValues = (key: string, asc: boolean = true) => {
+export const compareValues = (key: string, asc: boolean) => {
   return (a, b) => {
     if(!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
       // property doesn't exist on either object
