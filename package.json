@@ -3,7 +3,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "dev": "webpack-dev-server --mode development --hot --progress --color --port 3000",
+    "dev": "webpack-dev-server --mode development --hot --progress --color --port 3000 --open",
     "build": "webpack -p --progress --colors"
   },
   "devDependencies": {
