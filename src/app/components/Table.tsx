@@ -1,9 +1,18 @@
 import * as React from "react";
+import { default as MuiTable } from "@material-ui/core/es/Table/Table";
+import TableHead from "@material-ui/core/es/TableHead/TableHead";
+import TableBody from "@material-ui/core/es/TableBody/TableBody";
+import TableRow from "@material-ui/core/es/TableRow/TableRow";
+import TableCell from "@material-ui/core/es/TableCell/TableCell";
+import TableSortLabel from "@material-ui/core/es/TableSortLabel/TableSortLabel";
+import CircularProgress from "@material-ui/core/es/CircularProgress/CircularProgress";
+import Button from "@material-ui/core/es/Button/Button";
 import "app/sass/components/Table.scss";
 import {default as labels} from "app/dictionaries/globalDictionary.json";
 import { RecordModel, TableState } from "app/models";
-import { detectSignum } from "app/utils/helpers";
 import { LINES_TO_LOAD } from "app/utils/constants";
+import { detectSignum } from "app/utils/helpers";
+
 
 interface Props {
   head: any[],
@@ -68,7 +77,9 @@ export default class Table extends React.Component<Props, TableState> {
 
       case 'link':
         return <span>
-          <a target="_blank" href={value}>{labels.open}</a>
+          <Button variant="outlined" target="_blank" href={value}>
+            {labels.open}
+          </Button>
         </span>;
 
       default:
@@ -77,33 +88,62 @@ export default class Table extends React.Component<Props, TableState> {
   }
 
   public render() {
-    const {head, body, loading} = this.props;
+    const { head, loading, body } = this.props,
+          { sortBy, asc } = this.state;
+
+    const cellWidth = `${100/head.length}%`;
+
+    const tableHead = (
+      <TableHead>
+        <TableRow>
+          {head.map((item, key) => (
+            <TableCell key={key} style={{width: cellWidth}}>
+              <TableSortLabel
+                active={sortBy === item.id}
+                direction={asc? 'asc': 'desc'}
+                onClick={() => this.handleSort(item.id, item.sortable)}
+              >
+                {item.label}
+              </TableSortLabel>
+            </TableCell>
+          ))}
+        </TableRow>
+      </TableHead>
+    );
+
+    const tableBody = (
+      <TableBody>
+        {body.map((row, rowKey) => (
+          <TableRow key={rowKey}>
+            {head.map((cell, cellKey) => (
+              <TableCell key={cellKey} style={{width: cellWidth}}>
+                {Table.formatCell(row[cell.id], cell.format)}
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    );
+
+    const loadButton = (
+      <div className="table__load-button-container">
+        {loading?
+          <CircularProgress />
+          :
+          <Button variant="contained" color="primary" onClick={this.handleLoad}>
+            {labels.load_more}
+          </Button>
+        }
+      </div>
+    );
 
     return (
       <div className="table">
-        {head.map((item, key) => (
-          <div
-            key={key}
-            className="table__cell table__cell-head"
-            onClick={() => this.handleSort(item.id, item.sortable)}
-          >
-            {item.label}
-          </div>
-        ))}
-
-        {body.map((row, rowKey) => (
-          <div key={rowKey}>
-            {head.map((cell, cellKey) => (
-              <div key={cellKey} className="table__cell">
-                {Table.formatCell(row[cell.id], cell.format)}
-              </div>
-            ))}
-          </div>
-        ))}
-
-        {loading && (<p>loading...</p>)}
-
-        {!loading && <button onClick={this.handleLoad}>{labels.load_more}</button>}
+        <MuiTable>
+          {tableHead}
+          {tableBody}
+        </MuiTable>
+        {loadButton}
       </div>
     );
   }

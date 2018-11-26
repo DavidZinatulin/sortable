@@ -1,13 +1,20 @@
 .table {
-  &__cell {
-    display: inline-block;
-    margin-right: 20px;
-    width: 15%;
-    overflow-x: hidden;
-
-    &-head {
-      min-height: 50px;
+  table {
+    th {
+      background: #f5f5f5;
     }
+    th, td {
+      padding: 2px 15px;
+    }
+
+    a {
+      font-size: 10px;
+    }
+  }
+
+  &__load-button-container {
+    text-align: center;
+    padding: 15px;
   }
 
   .color-negative {
@@ -15,10 +22,10 @@
   }
 
   .color-positive {
-    color: lawngreen;
+    color: limegreen;
   }
 
   .color-zero {
-    color: deepskyblue;
+    color: dodgerblue;
   }
 }
