@@ -1,5 +1,3 @@
-// export type Id = number | string;
-
 export interface RecordsModel {
   data: RecordModel[];
   loading: boolean;
@@ -18,4 +16,8 @@ export interface RecordModel {
 export interface TableState {
   sortBy: string,
   asc: boolean
+}
+
+export interface RootState {
+  table: RecordsModel;
 }
