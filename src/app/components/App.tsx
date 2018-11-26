@@ -40,12 +40,12 @@ class App extends React.Component<AppProps> {
 
   private checkUrl(): TableState {
     const query = this.props.location.hash.replace('#', ''),
-      parsed = queryString.parse(query),
-      { sortBy, asc } = parsed;
+          parsed = queryString.parse(query),
+          { sortBy, asc } = parsed;
 
     if(sortBy && asc) {
       const column = sortBy.toString(),
-        order = asc === 'true';
+            order = asc === 'true';
 
       return {sortBy: column, asc: order};
     }

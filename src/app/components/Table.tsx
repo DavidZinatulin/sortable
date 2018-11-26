@@ -34,19 +34,16 @@ export default class Table extends React.Component<Props, TableState> {
   }
 
   private handleLoad(): void {
-    const {sortBy, asc} = this.state;
-
-    const { body } = this.props;
+    const {sortBy, asc} = this.state,
+          { body } = this.props;
 
     this.props.onLoad(body.length + 5, body, sortBy, asc);
   }
 
   private handleSort(sortColumn: string, sortable: boolean): void {
-    const {sortBy, asc} = this.state;
-
-    const { body, loading, clearBody, onLoad, onSort } = this.props;
-
-    const isAscending = sortColumn === sortBy? !asc: asc;
+    const {sortBy, asc} = this.state,
+          { body, loading, clearBody, onLoad, onSort } = this.props,
+          isAscending = sortColumn === sortBy? !asc: asc;
 
     if (!sortable || loading) { return }
 
