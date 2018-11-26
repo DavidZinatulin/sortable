@@ -17,7 +17,3 @@ export interface TableState {
   sortBy: string,
   asc: boolean
 }
-
-export interface RootState {
-  table: RecordsModel;
-}
