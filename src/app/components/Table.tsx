@@ -1,8 +1,9 @@
 import * as React from "react";
 import "app/sass/components/Table.scss";
-import {default as labels} from "app/dictionaries/global.json";
+import {default as labels} from "app/dictionaries/globalDictionary.json";
 import { RecordModel, TableState } from "app/models";
 import { detectSignum } from "app/utils/helpers";
+import { LINES_TO_LOAD } from "app/utils/constants";
 
 interface Props {
   head: any[],
@@ -37,7 +38,7 @@ export default class Table extends React.Component<Props, TableState> {
     const {sortBy, asc} = this.state,
           { body } = this.props;
 
-    this.props.onLoad(body.length + 5, body, sortBy, asc);
+    this.props.onLoad(body.length + LINES_TO_LOAD, body, sortBy, asc);
   }
 
   private handleSort(sortColumn: string, sortable: boolean): void {

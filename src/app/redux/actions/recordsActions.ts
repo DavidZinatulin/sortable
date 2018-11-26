@@ -1,14 +1,20 @@
 import { ajaxMock } from "app/apiMock/ajaxMock";
 import { RecordModel } from "app/models";
+import {
+  LINES_TO_LOAD,
+  CLEAR_RECORDS,
+  RECEIVE_RECORDS,
+  REQUEST_RECORDS
+} from "app/utils/constants";
 
 export const requestRecords = (
-  itemsToLoad: number = 5,
+  itemsToLoad: number = LINES_TO_LOAD,
   previouslyLoaded: RecordModel[] = [],
   sortBy: string = 'streams',
   asc: boolean = false
 ) => {
   return async (dispatch) => {
-    dispatch({ type: 'REQUEST_RECORDS', loading: true });
+    dispatch({ type: REQUEST_RECORDS, loading: true });
 
     const res = await ajaxMock(sortBy, asc, itemsToLoad, previouslyLoaded.length);
 
@@ -22,10 +28,10 @@ const receiveRecords = (
   previouslyLoaded: RecordModel[]
 ) => {
   dispatch({
-    type: 'RECEIVE_RECORDS',
+    type: RECEIVE_RECORDS,
     loading: false,
     data: [...previouslyLoaded, ...result]
   });
 };
 
-export const clearRecords = () => ({ type: 'CLEAR_RECORDS', data: [] });
+export const clearRecords = () => ({ type: CLEAR_RECORDS, data: [] });

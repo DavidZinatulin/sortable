@@ -6,6 +6,7 @@ import { RecordsTable } from "app/structures/tables";
 import { RecordModel, RecordsModel, TableState } from "app/models";
 import { clearRecords, requestRecords } from "app/redux/actions/recordsActions";
 import Table from "app/components/Table";
+import { LINES_TO_LOAD } from "app/utils/constants";
 
 
 interface AppProps extends RecordsModel, RouteComponentProps {
@@ -29,7 +30,7 @@ class App extends React.Component<AppProps> {
   public componentDidMount() {
     const {sortBy, asc} = this.defaultSorting;
 
-    this.props.loadRecords(5, [], sortBy, asc);
+    this.props.loadRecords(LINES_TO_LOAD, [], sortBy, asc);
   }
 
   private changeUrlOnSort(sortBy: string, asc: boolean): void {
@@ -45,9 +46,9 @@ class App extends React.Component<AppProps> {
 
     if(sortBy && asc) {
       const column = sortBy.toString(),
-            order = asc === 'true';
+            isAscending = asc === 'true';
 
-      return {sortBy: column, asc: order};
+      return {sortBy: column, asc: isAscending};
     }
     else {
       return {sortBy: '', asc: false};
@@ -55,16 +56,19 @@ class App extends React.Component<AppProps> {
   }
 
   public render() {
+    const { data, loading, loadRecords, clearRecords } = this.props,
+          { changeUrlOnSort, defaultSorting } = this;
+
     return(
       <div className='app'>
         <Table
           head={RecordsTable}
-          body={this.props.data}
-          loading={this.props.loading}
-          onLoad={this.props.loadRecords}
-          clearBody={this.props.clearRecords}
-          onSort={this.changeUrlOnSort}
-          defaultState={this.defaultSorting}
+          body={data}
+          loading={loading}
+          onLoad={loadRecords}
+          clearBody={clearRecords}
+          onSort={changeUrlOnSort}
+          defaultState={defaultSorting}
         />
       </div>
 

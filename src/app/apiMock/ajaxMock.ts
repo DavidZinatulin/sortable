@@ -1,5 +1,6 @@
 import {default as sampleData} from "./records-sample.json";
 import { compareValues } from "app/utils/helpers";
+import { AJAX_MOCK_DELAY } from "app/utils/constants";
 
 export const ajaxMock = async (
   sortBy: string,
@@ -16,7 +17,7 @@ export const ajaxMock = async (
   const response = await new Promise((resolve) => {
     setTimeout(() => {
       resolve(responseData)
-    }, 100);
+    }, AJAX_MOCK_DELAY);
   });
 
   return response;

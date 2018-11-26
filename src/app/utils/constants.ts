@@ -1,0 +1,6 @@
+export const AJAX_MOCK_DELAY = 500;
+export const LINES_TO_LOAD = 5;
+
+export const REQUEST_RECORDS = 'REQUEST_RECORDS';
+export const RECEIVE_RECORDS = 'RECEIVE_RECORDS';
+export const CLEAR_RECORDS = 'CLEAR_RECORDS';
