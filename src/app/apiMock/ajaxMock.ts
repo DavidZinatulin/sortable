@@ -9,7 +9,7 @@ export const ajaxMock = async (
   previouslyLoaded?: number
 ) => {
 
-  let responseData = sampleData
+  const responseData = sampleData
     .sort(compareValues(sortBy, asc))
     .slice(previouslyLoaded, itemsToLoad);
 
