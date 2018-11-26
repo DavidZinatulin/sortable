@@ -1,7 +1,7 @@
 import * as React from "react";
 import "app/sass/components/Table.scss";
 import {default as labels} from "app/dictionaries/global.json";
-import { RecordModel } from "app/models";
+import { RecordModel, TableState } from "app/models";
 import { detectSignum } from "app/utils/helpers";
 
 interface Props {
@@ -15,23 +15,20 @@ interface Props {
     asc?: boolean
   ) => void,
   clearBody: () => void,
-  onSort?: (sortBy: string) => void
+  onSort?: (sortBy: string, asc: boolean) => void,
+  defaultState?: TableState
 }
 
-interface State {
-  sortBy: string,
-  asc: boolean
-}
-
-export default class Table extends React.Component<Props, State> {
+export default class Table extends React.Component<Props, TableState> {
   constructor(props: Props) {
     super(props);
 
-    this.state = {
+    const state = {
       sortBy: '',
       asc: false
     };
 
+    this.state = props.defaultState? props.defaultState: state;
     this.handleSort = this.handleSort.bind(this);
     this.handleLoad = this.handleLoad.bind(this);
   }
@@ -47,17 +44,16 @@ export default class Table extends React.Component<Props, State> {
   private handleSort(sortColumn: string, sortable: boolean): void {
     const {sortBy, asc} = this.state;
 
-    const { body, loading } = this.props;
+    const { body, loading, clearBody, onLoad, onSort } = this.props;
+
+    const isAscending = sortColumn === sortBy? !asc: asc;
 
     if (!sortable || loading) { return }
 
-    let sortOrder = asc;
-
-    if (sortColumn === sortBy) { sortOrder = !sortOrder; }
-
-    this.setState({ sortBy: sortColumn, asc: sortOrder});
-    this.props.clearBody();
-    this.props.onLoad(body.length , [], sortColumn, sortOrder);
+    this.setState({ sortBy: sortColumn, asc: isAscending});
+    clearBody();
+    onLoad(body.length , [], sortColumn, isAscending);
+    onSort && onSort(sortColumn, isAscending);
   }
 
   private static formatCell(value: any, formatType: string): JSX.Element {

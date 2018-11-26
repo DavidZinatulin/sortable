@@ -1,8 +1,9 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
+import * as queryString from "querystring";
 import { RecordsTable } from "app/structures/tables";
-import { RecordModel, RecordsModel } from "app/models";
+import { RecordModel, RecordsModel, TableState } from "app/models";
 import { clearRecords, requestRecords } from "app/redux/actions/recordsActions";
 import Table from "app/components/Table";
 
@@ -18,31 +19,52 @@ interface AppProps extends RecordsModel, RouteComponentProps {
 }
 
 class App extends React.Component<AppProps> {
+  private defaultSorting: TableState = this.checkUrl();
+
   constructor(props: AppProps) {
     super(props);
-    this.changeHashOnSort = this.changeHashOnSort.bind(this);
+    this.changeUrlOnSort = this.changeUrlOnSort.bind(this);
   }
 
   public componentDidMount() {
-    this.props.loadRecords(5, []);
+    const {sortBy, asc} = this.defaultSorting;
+
+    this.props.loadRecords(5, [], sortBy, asc);
   }
 
-  private changeHashOnSort(sortBy: string, asc: boolean): void {
+  private changeUrlOnSort(sortBy: string, asc: boolean): void {
+    this.props.history.push(
+      `#${ queryString.stringify({sortBy, asc}) }`
+    );
+  }
 
+  private checkUrl(): TableState {
+    const query = this.props.location.hash.replace('#', ''),
+      parsed = queryString.parse(query),
+      { sortBy, asc } = parsed;
+
+    if(sortBy && asc) {
+      const column = sortBy.toString(),
+        order = asc === 'true';
+
+      return {sortBy: column, asc: order};
+    }
+    else {
+      return {sortBy: '', asc: false};
+    }
   }
 
   public render() {
     return(
       <div className='app'>
-        <p>this is the app</p>
-        <p>{this.props.location.hash.replace('#', '')}</p>
         <Table
           head={RecordsTable}
           body={this.props.data}
           loading={this.props.loading}
           onLoad={this.props.loadRecords}
-          // onSort={this.changeHashOnSort}
           clearBody={this.props.clearRecords}
+          onSort={this.changeUrlOnSort}
+          defaultState={this.defaultSorting}
         />
       </div>
 

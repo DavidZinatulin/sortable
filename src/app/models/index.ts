@@ -15,9 +15,7 @@ export interface RecordModel {
   link: string;
 }
 
-export interface TableHeadModel {
-  id: number,
-  label: string,
-  sortable?: boolean,
-  formatters?: string[]
+export interface TableState {
+  sortBy: string,
+  asc: boolean
 }
