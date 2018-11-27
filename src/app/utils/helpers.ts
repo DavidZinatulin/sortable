@@ -7,11 +7,6 @@ export const compareValues = (key: string, asc: boolean) => {
     let varA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key];
     let varB = (typeof b[key] === 'string') ? b[key].toUpperCase() : b[key];
 
-    if(key === 'id'){ // exception for IDs - always convert to integer
-      varA = parseInt(a[key]);
-      varB = parseInt(b[key]);
-    }
-
     let comparison = 0;
 
     if (varA > varB) {
