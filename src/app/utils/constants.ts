@@ -1,4 +1,4 @@
-export const AJAX_MOCK_DELAY = 1000;
+export const AJAX_MOCK_DELAY = 500;
 export const LINES_TO_LOAD = 5;
 
 export const REQUEST_RECORDS = 'REQUEST_RECORDS';
