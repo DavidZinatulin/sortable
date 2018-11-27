@@ -44,14 +44,14 @@ export default class Table extends React.Component<Props, TableState> {
   }
 
   private handleLoad(): void {
-    const {sortBy, asc} = this.state,
+    const { sortBy, asc } = this.state,
           { body } = this.props;
 
     this.props.onLoad(body.length + LINES_TO_LOAD, body, sortBy, asc);
   }
 
   private handleSort(sortColumn: string, sortable: boolean): void {
-    const {sortBy, asc} = this.state,
+    const { sortBy, asc } = this.state,
           { body, loading, clearBody, onLoad, onSort } = this.props,
           isAscending = sortColumn === sortBy? !asc: asc;
 
@@ -116,7 +116,7 @@ export default class Table extends React.Component<Props, TableState> {
         {body.map((row, rowKey) => (
           <TableRow key={rowKey}>
             {head.map((cell, cellKey) => (
-              <TableCell key={cellKey} style={{width: cellWidth}}>
+              <TableCell key={cellKey}>
                 {Table.formatCell(row[cell.id], cell.format)}
               </TableCell>
             ))}
