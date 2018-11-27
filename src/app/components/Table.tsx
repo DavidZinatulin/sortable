@@ -8,7 +8,7 @@ import TableSortLabel from "@material-ui/core/es/TableSortLabel/TableSortLabel";
 import CircularProgress from "@material-ui/core/es/CircularProgress/CircularProgress";
 import Button from "@material-ui/core/es/Button/Button";
 import "app/sass/components/Table.scss";
-import {default as labels} from "app/dictionaries/globalDictionary.json";
+import {default as labels} from "assets/dictionaries/globalDictionary.json";
 import { RecordModel, TableState } from "app/models";
 import { LINES_TO_LOAD } from "app/utils/constants";
 import { detectSignum } from "app/utils/helpers";
